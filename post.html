@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Awesome headless blog</title>
+
+  <link rel="stylesheet" href="styles.css?v=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        
+        let searchParams = new URLSearchParams(window.location.search);
+        let postId = searchParams.get('id');
+
+        $.getJSON('https://discoverbeast.tastewp.com//wp-json/wp/v2/posts/' + postId , function(post){
+                            
+            $('#latest-posts').append('<div class="post"><h1>' + post.title.rendered + '</h1>'+
+            '<p>' + post.content.rendered + '</p></div>');
+        });
+      });
+  </script>
+</head>
+<div id="latest-posts" class="single">
+
+</div>
+<body>
+</body>
+</html>
